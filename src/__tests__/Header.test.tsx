@@ -6,7 +6,7 @@ describe("<Header />", () => {
   test("It renders the header component", async () => {
     render(<Header />);
 
-    const header = await screen.findByRole("heading");
+    const header = await screen.findByRole("navigation");
 
     expect(header).toBeDefined();
   });
