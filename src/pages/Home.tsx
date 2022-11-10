@@ -7,6 +7,7 @@ const Home = () => {
       </div>
 
       <button type="button">Swap</button>
+      <button type="submit">Convert</button>
     </div>
   );
 };
