@@ -35,10 +35,10 @@ describe("<Home />", () => {
   test("it displays a convert button of type submit", () => {
     setup();
 
-    const convertButton = screen.getByRole("submit", { name: "Convert" });
+    const convertButton = screen.getByRole("button", { name: "Convert" });
 
     expect(convertButton).toBeDefined();
-    expect(convertButton).toHaveAttribute("type", "button");
+    expect(convertButton).toHaveAttribute("type", "submit");
   });
 });
 
