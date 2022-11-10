@@ -70,6 +70,16 @@ describe("<Home />", () => {
     expect(selectDropdown.value).toEqual("EUR");
     expect(selectDropdownLabel).toBeDefined();
   });
+  
+  test("it displays a select dropdown with the To Label and a default value of USD", () => {
+    setup();
+
+    const selectDropdown = screen.getByTestId("to") as HTMLSelectElement;
+    const selectDropdownLabel = screen.getAllByLabelText("To");
+
+    expect(selectDropdown.value).toEqual("USD");
+    expect(selectDropdownLabel).toBeDefined();
+  });
 });
 
 // Label should be FROM
