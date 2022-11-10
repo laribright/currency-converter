@@ -12,6 +12,13 @@ const Home = () => {
           <option value="EUR">EUR</option>
         </select>
       </div>
+      
+      <div>
+        <label htmlFor="to">To</label>
+        <select data-testid="to" id="to" value={"USD"}>
+          <option value="USD">USD</option>
+        </select>
+      </div>
 
       <button type="button">Swap</button>
       <button type="submit">Convert</button>
