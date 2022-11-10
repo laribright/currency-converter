@@ -31,6 +31,15 @@ describe("<Home />", () => {
     expect(swapButton).toBeDefined();
     expect(swapButton).toHaveAttribute("type", "button");
   });
+
+  test("it displays a convert button of type submit", () => {
+    setup();
+
+    const convertButton = screen.getByRole("submit", { name: "Convert" });
+
+    expect(convertButton).toBeDefined();
+    expect(convertButton).toHaveAttribute("type", "button");
+  });
 });
 
 // Label should be FROM
@@ -38,8 +47,6 @@ describe("<Home />", () => {
 
 // Label should be To
 // Dropdown that displays a list of currencies To
-
-// Button to swap from and to values
 
 // Button to convert
 
