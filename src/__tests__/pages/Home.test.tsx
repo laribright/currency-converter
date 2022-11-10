@@ -22,6 +22,15 @@ describe("<Home />", () => {
     expect(input.length).toBe(1);
     expect(input[0]).toHaveAttribute("type", "number");
   });
+
+  test("it displays a swap button of type button", () => {
+    setup();
+
+    const swapButton = screen.getByRole("button", { name: "Swap" });
+
+    expect(swapButton).toBeDefined();
+    expect(swapButton).toHaveAttribute("type", "button");
+  });
 });
 
 // Label should be FROM
