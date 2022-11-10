@@ -5,9 +5,9 @@ import App from "../App";
 
 describe("<App />", () => {
   it("renders the heading component", async () => {
-    render(<App />, {wrapper: BrowserRouter});
+    render(<App />, { wrapper: BrowserRouter });
 
-    const header = await screen.findByRole("navigation");
+    const header = await screen.findByTestId("header");
 
     expect(header).toBeDefined();
   });
