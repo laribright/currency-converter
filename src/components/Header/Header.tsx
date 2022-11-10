@@ -2,11 +2,17 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header data-testid="header">
-      <h2>Logo</h2>
+    <header className="header" data-testid="header">
+      <h2 className="header__logo">Logo</h2>
 
-      <Link to="/eur-usd">EUR-USD Details</Link>
-      <Link to="/eur-gbp">EUR-GBP Details</Link>
+      <div className="header__navigation-box">
+        <Link to="/eur-usd" className="header__navigation-link">
+          EUR-USD Details
+        </Link>
+        <Link to="/eur-gbp" className="header__navigation-link">
+          EUR-GBP Details
+        </Link>
+      </div>
     </header>
   );
 };
