@@ -10,4 +10,14 @@ describe("<Header />", () => {
 
     expect(header).toBeDefined();
   });
+
+  test("it displays a logo", () => {
+    render(<Header />);
+    const LOGO = "Logo";
+
+    const logoEl = screen.getAllByText(LOGO);
+
+    expect(logoEl).toBeDefined();
+    expect(logoEl.length).toBe(1);
+  });
 });
