@@ -1,0 +1,27 @@
+.header {
+  &__logo {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: $color-white;
+  }
+
+  &__navigation {
+    &-link {
+      color: $color-white;
+      text-decoration: none;
+      font-size: 1.8rem;
+      background-color: darken($color-primary, 10%);
+      padding: 1.7rem 1rem;
+      border-radius: 0.8rem;
+      transition: background-color 0.4s ease-in-out;
+
+      &:hover {
+        background-color: darken($color-primary, 60%);
+      }
+
+      &:first-child {
+        margin-right: 2rem;
+      }
+    }
+  }
+}
