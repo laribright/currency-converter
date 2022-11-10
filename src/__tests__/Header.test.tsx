@@ -4,24 +4,18 @@ import { BrowserRouter } from "react-router-dom";
 import Header from "../components/Header/Header";
 
 describe("<Header />", () => {
-  test("It renders the header component", async () => {
-    render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
+  const setup = () => render(<Header />, { wrapper: BrowserRouter });
 
-    const header = await screen.findByRole("navigation");
+  test("It renders the header component", async () => {
+    setup();
+
+    const header = screen.getByTestId("header");
 
     expect(header).toBeDefined();
   });
 
   test("it displays a logo", () => {
-    render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
+    setup();
     const LOGO = "Logo";
 
     const logoEl = screen.getAllByText(LOGO);
@@ -31,7 +25,8 @@ describe("<Header />", () => {
   });
 
   test("it displays two NavLinks. EUR-USD Details and EUR-GBP Details", () => {
-    render(<Header />, { wrapper: BrowserRouter });
+    setup();
+
     const navLinks = screen.getAllByRole("link");
     const eurUsdLinkEl = screen.getByRole("link", { name: "EUR-USD Details" });
     const eurGbpLinkEl = screen.getByRole("link", { name: "EUR-GBP Details" });
