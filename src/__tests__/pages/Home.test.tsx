@@ -12,10 +12,17 @@ describe("<Home />", () => {
 
     expect(HomePage).toBeDefined();
   });
-});
 
-// Display an input field that takes in numbers only
-// The input label should be amount
+  test("it displays an input field with type number", () => {
+    setup();
+
+    const input = screen.getAllByLabelText("Amount", { selector: "input" });
+
+    expect(input).toBeInTheDocument();
+    expect(input.length).toBe(1);
+    expect(input[0]).toHaveAttribute("type", "number");
+  });
+});
 
 // Label should be FROM
 // Dropdown that displays a list of currencies from
