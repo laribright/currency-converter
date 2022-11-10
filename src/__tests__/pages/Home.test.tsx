@@ -82,10 +82,4 @@ describe("<Home />", () => {
   });
 });
 
-// Label should be FROM
-// Dropdown that displays a list of currencies from
-
-// Label should be To
-// Dropdown that displays a list of currencies To
-
 // Button to redirect to Currency details page ----- More Details
