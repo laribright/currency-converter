@@ -18,7 +18,7 @@ describe("<Home />", () => {
 
     const input = screen.getAllByLabelText("Amount", { selector: "input" });
 
-    expect(input).toBeInTheDocument();
+    expect(input).toBeDefined();
     expect(input.length).toBe(1);
     expect(input[0]).toHaveAttribute("type", "number");
   });
