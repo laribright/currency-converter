@@ -5,6 +5,8 @@ const Home = () => {
         <label htmlFor="Amount">Amount</label>
         <input type="number" id="Amount" />
       </div>
+
+      <button type="button">Swap</button>
     </div>
   );
 };
