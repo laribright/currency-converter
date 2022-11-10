@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header role="navigation">
+    <header data-testid="header">
       <h2>Logo</h2>
 
       <Link to="/eur-usd">EUR-USD Details</Link>
