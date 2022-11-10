@@ -1,7 +1,27 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
 
 import Home from "../../pages/Home";
+
+// @Todo Move to it's own file
+const server = setupServer(
+  rest.get("/", (req, res, ctx) => {
+    return res(
+      ctx.json({
+        success: true,
+        symbols: {
+          AED: "United Arab Emirates Dirham",
+        },
+      })
+    );
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 describe("<Home />", () => {
   const setup = () => render(<Home />, { wrapper: BrowserRouter });
@@ -40,6 +60,16 @@ describe("<Home />", () => {
     expect(convertButton).toBeDefined();
     expect(convertButton).toHaveAttribute("type", "submit");
   });
+
+  test("it displays a select dropdown with the From Label and a default value of EUR", () => {
+    setup();
+
+    const selectDropdown = screen.getByTestId("from") as HTMLSelectElement;
+    const selectDropdownLabel = screen.getAllByLabelText("From");
+
+    expect(selectDropdown.value).toEqual("EUR");
+    expect(selectDropdownLabel).toBeDefined();
+  });
 });
 
 // Label should be FROM
@@ -47,7 +77,5 @@ describe("<Home />", () => {
 
 // Label should be To
 // Dropdown that displays a list of currencies To
-
-// Button to convert
 
 // Button to redirect to Currency details page ----- More Details
