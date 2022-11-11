@@ -98,6 +98,12 @@ export const currencySlice = createSlice({
         currencyTo: state.currencyFrom,
       };
     },
+    updateCurrencyFrom: (state, action: PayloadAction<string>) => {
+      return { ...state, currencyFrom: action.payload };
+    },
+    updateCurrencyTo: (state, action: PayloadAction<string>) => {
+      return { ...state, currencyTo: action.payload };
+    },
   },
   extraReducers(builder) {
     builder.addCase(convertCurrencies.pending, (state) => {
@@ -137,6 +143,11 @@ export const currencySlice = createSlice({
   },
 });
 
-export const { updateConversionAmount, onSwapClicked } = currencySlice.actions;
+export const {
+  updateConversionAmount,
+  onSwapClicked,
+  updateCurrencyFrom,
+  updateCurrencyTo,
+} = currencySlice.actions;
 
 export default currencySlice.reducer;
