@@ -20,9 +20,16 @@ export const currencySlice = createSlice({
     updateConversionAmount: (state, action: PayloadAction<number>) => {
       return { ...state, conversionAmount: action.payload };
     },
+    onSwapClicked: (state) => {
+      return {
+        ...state,
+        currencyFrom: state.currencyTo,
+        currencyTo: state.currencyFrom,
+      };
+    },
   },
 });
 
-export const { updateConversionAmount } = currencySlice.actions;
+export const { updateConversionAmount, onSwapClicked } = currencySlice.actions;
 
 export default currencySlice.reducer;
