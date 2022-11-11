@@ -1,11 +1,14 @@
 import { useEffect, useCallback } from "react";
 
-import { useAppSelector } from "../hooks/storeHooks";
+import { updateConversionAmount } from "../features/currency";
+import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 
 const Home = () => {
   const {
     currency: { conversionAmount, currencyFrom, currencyTo },
   } = useAppSelector((state) => state);
+
+  const dispatch = useAppDispatch();
 
   // const onFetchCurrencies = async () => {
   //   const result = await fetchCurrencies();
@@ -49,12 +52,9 @@ const Home = () => {
               type="number"
               id="Amount"
               value={conversionAmount}
-              // onChange={(e) =>
-              //   setCurrentCurrencyData((prevState) => ({
-              //     ...prevState,
-              //     conversionAmount: Number(e.target.value),
-              //   }))
-              // }
+              onChange={(e) =>
+                dispatch(updateConversionAmount(Number(e.target.value)))
+              }
             />
           </div>
 
