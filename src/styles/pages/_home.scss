@@ -2,6 +2,12 @@
   padding: 0 $padding-x-large;
 }
 
+.left-pane {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .currency-box--controls {
   display: flex;
   justify-content: space-between;
@@ -30,6 +36,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
 .conversion-result {
@@ -45,6 +52,7 @@
 .conversion-result--box {
   display: flex;
   justify-content: space-between;
+  margin-top: 2rem;
 }
 
 .conversion-details--link {

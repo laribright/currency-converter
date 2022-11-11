@@ -24,10 +24,15 @@ const Home = () => {
     // })();
   }, [conversionAmount, currencyFrom, currencyTo]);
 
+  const onSwapClicked = () => {
+    setCurrencyFrom(currencyTo);
+    setCurrencyTo(currencyFrom);
+  };
+
   return (
     <div className="home-page" data-testid="home-page">
       <div className="currency-box--controls">
-        <div>
+        <div className="left-pane">
           <div className="form-group">
             <label className="form-group--label" htmlFor="Amount">
               Amount
@@ -40,7 +45,9 @@ const Home = () => {
             />
           </div>
 
-          <div className="btn">1 EUR = 1.2 USD</div>
+          <div className="btn">
+            1 {currencyFrom} = 1.2 {currencyTo}
+          </div>
         </div>
 
         <div className="conversion-controls">
@@ -59,7 +66,7 @@ const Home = () => {
               </select>
             </div>
 
-            <button type="button" className="btn">
+            <button onClick={onSwapClicked} type="button" className="btn">
               Swap
             </button>
 
