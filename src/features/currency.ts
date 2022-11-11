@@ -16,9 +16,13 @@ const initialState: ICurrencyState = {
 export const currencySlice = createSlice({
   name: "currency",
   initialState,
-  reducers: {},
+  reducers: {
+    updateConversionAmount: (state, action: PayloadAction<number>) => {
+      return { ...state, conversionAmount: action.payload };
+    },
+  },
 });
 
-// export const {} = currencySlice.actions;
+export const { updateConversionAmount } = currencySlice.actions;
 
 export default currencySlice.reducer;
