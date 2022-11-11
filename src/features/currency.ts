@@ -9,7 +9,7 @@ interface IConvertCurrenciesFn {
   amount: number;
 }
 
-// ASYNC ACTION
+// convertCurrencies ACTION
 export const convertCurrencies = createAsyncThunk(
   "currencies/convertCurrencies",
   async (args: IConvertCurrenciesFn, thunkApi) => {
@@ -33,6 +33,25 @@ export const convertCurrencies = createAsyncThunk(
   }
 );
 
+// fetchCurrencies ACTION
+export const fetchCurrencies = createAsyncThunk(
+  "currencies/fetchCurrencies",
+  async (args, thunkApi) => {
+    const config = {
+      method: "GET",
+      headers: { apikey: process.env.REACT_APP_API_LAYER_KEY! },
+    };
+
+    try {
+      const response = await fetch(`${API_URL}/latest`, config);
+      const data = await response.json();
+      return Object.keys(data.rates);
+    } catch (error: any) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
 export interface ICurrencyState {
   currencyFrom: string;
   currencyTo: string;
@@ -40,6 +59,11 @@ export interface ICurrencyState {
   convertedData: {
     amount: null | number;
     loading: boolean;
+    error: null | string;
+  };
+  currencies: {
+    loading: boolean;
+    currenciesList: string[];
     error: null | string;
   };
 }
@@ -52,6 +76,11 @@ const initialState: ICurrencyState = {
     amount: null,
     error: null,
     loading: false,
+  },
+  currencies: {
+    loading: false,
+    currenciesList: [],
+    error: null,
   },
 };
 
@@ -83,6 +112,23 @@ export const currencySlice = createSlice({
     );
     builder.addCase(
       convertCurrencies.rejected,
+      (state, action: PayloadAction<any>) => {
+        state.convertedData.loading = false;
+        state.convertedData.error = action.payload;
+      }
+    );
+    builder.addCase(fetchCurrencies.pending, (state) => {
+      state.currencies.loading = true;
+    });
+    builder.addCase(
+      fetchCurrencies.fulfilled,
+      (state, action: PayloadAction<string[]>) => {
+        state.currencies.loading = false;
+        state.currencies.currenciesList = action.payload;
+      }
+    );
+    builder.addCase(
+      fetchCurrencies.rejected,
       (state, action: PayloadAction<any>) => {
         state.convertedData.loading = false;
         state.convertedData.error = action.payload;
