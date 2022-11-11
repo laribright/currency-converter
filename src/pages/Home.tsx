@@ -1,35 +1,33 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 
-import { onSwapClicked, updateConversionAmount } from "../features/currency";
+import {
+  convertCurrencies,
+  onSwapClicked,
+  updateConversionAmount,
+} from "../features/currency";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 
 const Home = () => {
   const {
-    currency: { conversionAmount, currencyFrom, currencyTo },
+    currency: {
+      conversionAmount,
+      currencyFrom,
+      currencyTo,
+      convertedData: { amount, error, loading },
+    },
   } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();
 
-  // const onFetchCurrencies = async () => {
-  //   const result = await fetchCurrencies();
-  //   setCurrencies(Object.keys(result.rates));
-  // };
-
-  const onConvertCurrencies = useCallback(async () => {
-    // const args = {
-    //   amount: conversionAmount,
-    //   from: currencyFrom,
-    //   to: currencyTo,
-    // };
-    // const result = await convertCurrencies(args);
-    // console.log("Result: ", result)
-    // setConvertedResult(result.result);
-  }, []);
-
   useEffect(() => {
-    // onConvertCurrencies();
-    // onFetchCurrencies();
-  }, [onConvertCurrencies]);
+    dispatch(
+      convertCurrencies({
+        amount: conversionAmount,
+        from: currencyFrom,
+        to: currencyTo,
+      })
+    );
+  }, []);
 
   return (
     <div className="home-page" data-testid="home-page">
@@ -113,13 +111,13 @@ const Home = () => {
             </div>
           </div>
 
-          <button type="submit" onClick={onConvertCurrencies} className="btn">
+          <button type="submit" className="btn">
             Convert
           </button>
 
           <div className="conversion-result--box">
             <div data-testid="conversion-result" className="conversion-result">
-              {currencyTo}
+              {amount && amount} {currencyTo}
             </div>
 
             <a className="conversion-details--link" href="#!">
