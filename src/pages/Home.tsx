@@ -5,6 +5,8 @@ import {
   fetchCurrencies,
   onSwapClicked,
   updateConversionAmount,
+  updateCurrencyFrom,
+  updateCurrencyTo,
 } from "../features/currency";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 
@@ -39,7 +41,7 @@ const Home = () => {
         to: currencyTo,
       })
     );
-    dispatch(fetchCurrencies())
+    dispatch(fetchCurrencies());
   }, []);
 
   return (
@@ -78,7 +80,7 @@ const Home = () => {
                 data-testid="from"
                 id="from"
                 value={currencyFrom}
-                // onChange={(e) => setCurrentCurrencyData()}
+                onChange={(e) => dispatch(updateCurrencyFrom(e.target.value))}
               >
                 <option value={currencyFrom}>{currencyFrom}</option>
                 {currenciesList.length &&
@@ -105,7 +107,7 @@ const Home = () => {
                 To
               </label>
               <select
-                // onChange={(e) => setCurrencyTo(e.target.value)}
+                onChange={(e) => dispatch(updateCurrencyTo(e.target.value))}
                 className="form-group--select"
                 data-testid="to"
                 id="to"
