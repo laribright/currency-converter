@@ -1,10 +1,13 @@
 import { API_URL } from "./../constants/api";
 
 export const fetchCurrencies = async () => {
+  const config = {
+    method: "GET",
+    headers: { apikey: process.env.REACT_APP_API_LAYER_KEY! },
+  };
+
   try {
-    const response = await fetch(
-      `${API_URL}/symbols?access_key=${process.env.REACT_APP_API_LAYER_KEY}`
-    );
+    const response = await fetch(`${API_URL}/latest`, config);
     return response.json();
   } catch (error: any) {
     throw new Error(error);

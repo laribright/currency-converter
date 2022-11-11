@@ -1,27 +1,37 @@
 import { useEffect, useState } from "react";
 
-import { convertCurrencies } from "../utils/api";
+import { convertCurrencies, fetchCurrencies } from "../utils/api";
 
 const Home = () => {
   const [currencyFrom, setCurrencyFrom] = useState("EUR");
   const [currencyTo, setCurrencyTo] = useState("USD");
+  const [currencies, setCurrencies] = useState<string[]>([""]);
   const [conversionAmount, setConversionAmount] = useState(1);
-  const [convertedResult, setConvertedResult] = useState("1.2");
+  const [convertedResult, setConvertedResult] = useState("");
 
   useEffect(() => {
-    // (async () => {
-    //   try {
-    //     const args = {
-    //       amount: conversionAmount,
-    //       from: currencyFrom,
-    //       to: currencyTo,
-    //     };
-    //     const result = await convertCurrencies(args);
-    //     setConvertedResult(result.result);
-    //   } catch (error) {
-    //     alert("Can't fetch Data");
-    //   }
-    // })();
+    (async () => {
+      try {
+        const args = {
+          amount: conversionAmount,
+          from: currencyFrom,
+          to: currencyTo,
+        };
+        const result = await convertCurrencies(args);
+        setConvertedResult(result.result);
+      } catch (error) {
+        alert("Can't fetch Data");
+      }
+    })();
+
+    (async () => {
+      try {
+        const result = await fetchCurrencies();
+        setCurrencies(Object.keys(result.rates));
+      } catch (error) {
+        alert("Can't fetch Data");
+      }
+    })();
   }, [conversionAmount, currencyFrom, currencyTo]);
 
   const onSwapClicked = () => {
@@ -42,6 +52,7 @@ const Home = () => {
               type="number"
               id="Amount"
               value={conversionAmount}
+              onChange={(e) => setConversionAmount(Number(e.target.value))}
             />
           </div>
 
@@ -62,7 +73,14 @@ const Home = () => {
                 id="from"
                 value={currencyFrom}
               >
-                <option value={currencyFrom}>{currencyFrom}</option>
+                {currencies.length &&
+                  currencies.map((currency) => {
+                    return (
+                      <option key={currency} value={currency}>
+                        {currency}
+                      </option>
+                    );
+                  })}
               </select>
             </div>
 
@@ -80,7 +98,7 @@ const Home = () => {
                 id="to"
                 value={currencyTo}
               >
-                <option value={currencyTo}>{currencyTo}</option>
+                {/* <option value={currencyTo}>{currencyTo}</option> */}
               </select>
             </div>
           </div>
