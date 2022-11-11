@@ -98,7 +98,14 @@ const Home = () => {
                 id="to"
                 value={currencyTo}
               >
-                {/* <option value={currencyTo}>{currencyTo}</option> */}
+                {currencies.length &&
+                  currencies.map((currency) => {
+                    return (
+                      <option key={currency} value={currency}>
+                        {currency}
+                      </option>
+                    );
+                  })}
               </select>
             </div>
           </div>
