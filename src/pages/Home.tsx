@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import {
   convertCurrencies,
+  fetchCurrencies,
   onSwapClicked,
   updateConversionAmount,
 } from "../features/currency";
@@ -13,11 +14,22 @@ const Home = () => {
       conversionAmount,
       currencyFrom,
       currencyTo,
-      convertedData: { amount, error, loading },
+      convertedData: { amount, error, loading: isConverting },
+      currencies: { currenciesList, error: fetchCurrenciesError, loading },
     },
   } = useAppSelector((state) => state);
 
   const dispatch = useAppDispatch();
+
+  const onConvertClicked = () => {
+    dispatch(
+      convertCurrencies({
+        amount: conversionAmount,
+        from: currencyFrom,
+        to: currencyTo,
+      })
+    );
+  };
 
   useEffect(() => {
     dispatch(
@@ -27,6 +39,7 @@ const Home = () => {
         to: currencyTo,
       })
     );
+    dispatch(fetchCurrencies())
   }, []);
 
   return (
@@ -68,14 +81,14 @@ const Home = () => {
                 // onChange={(e) => setCurrentCurrencyData()}
               >
                 <option value={currencyFrom}>{currencyFrom}</option>
-                {/* {currencies.length &&
-                  currencies.map((currency) => {
+                {currenciesList.length &&
+                  currenciesList.map((currency) => {
                     return (
                       <option key={currency} value={currency}>
                         {currency}
                       </option>
                     );
-                  })} */}
+                  })}
               </select>
             </div>
 
@@ -99,25 +112,25 @@ const Home = () => {
                 value={currencyTo}
               >
                 <option value={currencyTo}>{currencyTo}</option>
-                {/* {currencies.length &&
-                  currencies.map((currency) => {
+                {currenciesList.length &&
+                  currenciesList.map((currency) => {
                     return (
                       <option key={currency} value={currency}>
                         {currency}
                       </option>
                     );
-                  })} */}
+                  })}
               </select>
             </div>
           </div>
 
-          <button type="submit" className="btn">
+          <button type="submit" onClick={onConvertClicked} className="btn">
             Convert
           </button>
 
           <div className="conversion-result--box">
             <div data-testid="conversion-result" className="conversion-result">
-              {amount && amount} {currencyTo}
+              {isConverting ? "converting..." : `${amount} ${currencyTo}`}
             </div>
 
             <a className="conversion-details--link" href="#!">
