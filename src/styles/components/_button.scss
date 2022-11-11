@@ -1,0 +1,17 @@
+.btn {
+  padding: 1.3rem 2.5rem;
+  background-color: $color-primary;
+  border: none;
+  border-radius: 0.4rem;
+  color: $color-white;
+  cursor: pointer;
+  transition: background-color 0.4s ease-in-out;
+
+  &:hover {
+    background-color: darken($color-primary, 10%);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
