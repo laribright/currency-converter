@@ -1,42 +1,39 @@
-import { useEffect, useState } from "react";
+import { useEffect, useCallback } from "react";
 
-import { convertCurrencies, fetchCurrencies } from "../utils/api";
+import { useAppSelector } from "../hooks/storeHooks";
 
 const Home = () => {
-  const [currencyFrom, setCurrencyFrom] = useState("EUR");
-  const [currencyTo, setCurrencyTo] = useState("USD");
-  const [currencies, setCurrencies] = useState<string[]>([""]);
-  const [conversionAmount, setConversionAmount] = useState(1);
-  const [convertedResult, setConvertedResult] = useState("");
+  const {
+    currency: { conversionAmount, currencyFrom, currencyTo },
+  } = useAppSelector((state) => state);
+
+  // const onFetchCurrencies = async () => {
+  //   const result = await fetchCurrencies();
+  //   setCurrencies(Object.keys(result.rates));
+  // };
+
+  const onConvertCurrencies = useCallback(async () => {
+    // const args = {
+    //   amount: conversionAmount,
+    //   from: currencyFrom,
+    //   to: currencyTo,
+    // };
+    // const result = await convertCurrencies(args);
+    // console.log("Result: ", result)
+    // setConvertedResult(result.result);
+  }, []);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const args = {
-          amount: conversionAmount,
-          from: currencyFrom,
-          to: currencyTo,
-        };
-        const result = await convertCurrencies(args);
-        setConvertedResult(result.result);
-      } catch (error) {
-        alert("Can't fetch Data");
-      }
-    })();
-
-    (async () => {
-      try {
-        const result = await fetchCurrencies();
-        setCurrencies(Object.keys(result.rates));
-      } catch (error) {
-        alert("Can't fetch Data");
-      }
-    })();
-  }, [conversionAmount, currencyFrom, currencyTo]);
+    // onConvertCurrencies();
+    // onFetchCurrencies();
+  }, [onConvertCurrencies]);
 
   const onSwapClicked = () => {
-    setCurrencyFrom(currencyTo);
-    setCurrencyTo(currencyFrom);
+    // setCurrentCurrencyData((prevState) => ({
+    //   ...prevState,
+    //   currencyFrom: prevState.currencyTo,
+    //   currencyTo: prevState.currencyFrom,
+    // }));
   };
 
   return (
@@ -52,12 +49,18 @@ const Home = () => {
               type="number"
               id="Amount"
               value={conversionAmount}
-              onChange={(e) => setConversionAmount(Number(e.target.value))}
+              // onChange={(e) =>
+              //   setCurrentCurrencyData((prevState) => ({
+              //     ...prevState,
+              //     conversionAmount: Number(e.target.value),
+              //   }))
+              // }
             />
           </div>
 
           <div className="btn">
-            1 {currencyFrom} = 1.2 {currencyTo}
+            1 {currencyFrom} = 1.2
+            {currencyTo}
           </div>
         </div>
 
@@ -72,15 +75,17 @@ const Home = () => {
                 data-testid="from"
                 id="from"
                 value={currencyFrom}
+                // onChange={(e) => setCurrentCurrencyData()}
               >
-                {currencies.length &&
+                <option value={currencyFrom}>{currencyFrom}</option>
+                {/* {currencies.length &&
                   currencies.map((currency) => {
                     return (
                       <option key={currency} value={currency}>
                         {currency}
                       </option>
                     );
-                  })}
+                  })} */}
               </select>
             </div>
 
@@ -93,30 +98,32 @@ const Home = () => {
                 To
               </label>
               <select
+                // onChange={(e) => setCurrencyTo(e.target.value)}
                 className="form-group--select"
                 data-testid="to"
                 id="to"
                 value={currencyTo}
               >
-                {currencies.length &&
+                <option value={currencyTo}>{currencyTo}</option>
+                {/* {currencies.length &&
                   currencies.map((currency) => {
                     return (
                       <option key={currency} value={currency}>
                         {currency}
                       </option>
                     );
-                  })}
+                  })} */}
               </select>
             </div>
           </div>
 
-          <button type="submit" className="btn">
+          <button type="submit" onClick={onConvertCurrencies} className="btn">
             Convert
           </button>
 
           <div className="conversion-result--box">
             <div data-testid="conversion-result" className="conversion-result">
-              {convertedResult} {currencyTo}
+              {currencyTo}
             </div>
 
             <a className="conversion-details--link" href="#!">
