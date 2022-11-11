@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 
-import { updateConversionAmount } from "../features/currency";
+import { onSwapClicked, updateConversionAmount } from "../features/currency";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
 
 const Home = () => {
@@ -30,14 +30,6 @@ const Home = () => {
     // onConvertCurrencies();
     // onFetchCurrencies();
   }, [onConvertCurrencies]);
-
-  const onSwapClicked = () => {
-    // setCurrentCurrencyData((prevState) => ({
-    //   ...prevState,
-    //   currencyFrom: prevState.currencyTo,
-    //   currencyTo: prevState.currencyFrom,
-    // }));
-  };
 
   return (
     <div className="home-page" data-testid="home-page">
@@ -89,7 +81,11 @@ const Home = () => {
               </select>
             </div>
 
-            <button onClick={onSwapClicked} type="button" className="btn">
+            <button
+              onClick={() => dispatch(onSwapClicked())}
+              type="button"
+              className="btn"
+            >
               Swap
             </button>
 
