@@ -4,16 +4,15 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 
 import Home from "../../pages/Home";
+import { API_URL } from "../../constants/api";
 
 // @Todo Move to it's own file
 const server = setupServer(
-  rest.get("/", (req, res, ctx) => {
+  rest.get(`https://jsonplaceholder.typicode.com/posts`, (req, res, ctx) => {
     return res(
       ctx.json({
         success: true,
-        symbols: {
-          AED: "United Arab Emirates Dirham",
-        },
+        result: 1.2,
       })
     );
   })
@@ -70,7 +69,7 @@ describe("<Home />", () => {
     expect(selectDropdown.value).toEqual("EUR");
     expect(selectDropdownLabel).toBeDefined();
   });
-  
+
   test("it displays a select dropdown with the To Label and a default value of USD", () => {
     setup();
 
@@ -80,6 +79,12 @@ describe("<Home />", () => {
     expect(selectDropdown.value).toEqual("USD");
     expect(selectDropdownLabel).toBeDefined();
   });
+
+  // test("it displays the converted currencies result", () => {
+  //   setup();
+
+  //   expect(screen.getByTestId("conversion-result")).toHaveTextContent("1.2");
+  // });
 });
 
 // Button to redirect to Currency details page ----- More Details
