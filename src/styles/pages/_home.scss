@@ -1,5 +1,11 @@
 .home-page {
   padding: $padding-y-large $padding-x-large;
+
+  @media only screen and (max-width: 700px) {
+    & {
+      padding: $padding-y-small $padding-x-small;
+    }
+  }
 }
 
 .grid-display {
@@ -7,4 +13,10 @@
   grid-template-columns: repeat(auto-fill, minmax(32.5rem, 1fr));
   grid-template-rows: auto;
   gap: 2.4rem;
+
+  @media only screen and (max-width: 700px) {
+    & {
+      gap: 1rem;
+    }
+  }
 }

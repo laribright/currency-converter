@@ -64,7 +64,7 @@ const Layout: FC<ILayoutProps> = (props) => {
           )}
         </div>
 
-        <div className="flex currency-box--controls">
+        <div className="currency-box--controls">
           <div className="flex-vertical">
             <div className="form-group">
               <label className="form-group--label" htmlFor="Amount">
