@@ -43,9 +43,9 @@ export const fetchCurrencies = createAsyncThunk(
     };
 
     try {
-      const response = await fetch(`${API_URL}/latest`, config);
+      const response = await fetch(`${API_URL}/symbols`, config);
       const data = await response.json();
-      return Object.keys(data.rates);
+      return data.symbols;
     } catch (error: any) {
       return thunkApi.rejectWithValue(error.message);
     }
@@ -63,7 +63,7 @@ export interface ICurrencyState {
   };
   currencies: {
     loading: boolean;
-    currenciesList: string[];
+    currenciesList: any;
     error: null | string;
   };
 }
@@ -79,7 +79,7 @@ const initialState: ICurrencyState = {
   },
   currencies: {
     loading: false,
-    currenciesList: [],
+    currenciesList: {},
     error: null,
   },
 };
@@ -128,7 +128,7 @@ export const currencySlice = createSlice({
     });
     builder.addCase(
       fetchCurrencies.fulfilled,
-      (state, action: PayloadAction<string[]>) => {
+      (state, action: PayloadAction<object>) => {
         state.currencies.loading = false;
         state.currencies.currenciesList = action.payload;
       }
