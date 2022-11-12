@@ -8,6 +8,7 @@ import {
 } from "../../features/currency";
 import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
 import ConversionControls from "../ConversionControls/ConversionControls";
+import ConversionResult from "../ConversionResult/ConversionResult";
 
 interface ILayoutProps {
   children: ReactNode;
@@ -85,12 +86,7 @@ const Layout: FC<ILayoutProps> = (props) => {
               <ConversionControls />
 
               <div className="conversion-result--box">
-                <div
-                  data-testid="conversion-result"
-                  className="conversion-result"
-                >
-                  {isConverting ? "converting..." : `${amount} ${currencyTo}`}
-                </div>
+                <ConversionResult />
 
                 {location.pathname !== "/currency/details" && (
                   <Link
