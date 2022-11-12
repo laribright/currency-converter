@@ -5,6 +5,13 @@
     color: $color-white;
   }
 
+  @media only screen and (max-width: 700px) {
+    &__logo {
+      font-weight: 500;
+      font-size: 1.8rem;
+    }
+  }
+
   &__navigation {
     &-link {
       color: $color-white;
@@ -21,6 +28,13 @@
 
       &:first-child {
         margin-right: 2rem;
+      }
+
+      @media only screen and (max-width: 700px) {
+        & {
+          font-size: 1.2rem;
+          padding: 1.2rem .5rem;
+        }
       }
     }
   }

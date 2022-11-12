@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { updateCurrencyFrom, updateCurrencyTo } from "../../features/currency";
 import { useAppDispatch } from "../../hooks/storeHooks";
