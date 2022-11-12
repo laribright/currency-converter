@@ -25,7 +25,11 @@ const Layout: FC<ILayoutProps> = (props) => {
       conversionAmount,
       currencyFrom,
       currencyTo,
-      convertedData: { amount, error, loading: isConverting },
+      convertedData: {
+        amount,
+        error: convertingCurrencyError,
+        loading: isConverting,
+      },
       currencies: { currenciesList, error: fetchCurrenciesError, loading },
     },
   } = useAppSelector((state) => state);
@@ -44,6 +48,7 @@ const Layout: FC<ILayoutProps> = (props) => {
   return (
     <main className="main">
       <div className="layout">
+        {/* {convertingCurrencyError && <p>{convertingCurrencyError}</p>} */}
         <div className="flex">
           {location.pathname === "/currency/details" ? (
             <h1>
