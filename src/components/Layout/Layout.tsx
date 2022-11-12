@@ -1,5 +1,5 @@
-import { FC, ReactNode, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { FC, memo, ReactNode, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 import {
   convertCurrencies,
@@ -17,6 +17,10 @@ interface ILayoutProps {
 
 const Layout: FC<ILayoutProps> = (props) => {
   const { children } = props;
+
+  const location = useLocation();
+
+  console.log(location);
 
   const {
     currency: {
@@ -51,15 +55,25 @@ const Layout: FC<ILayoutProps> = (props) => {
     dispatch(fetchCurrencies());
   }, []);
 
+  console.log(currenciesList);
+
   return (
     <main className="layout">
       <div className="home-page" data-testid="home-page">
         <div className="fixed-home-page">
-          <div>
-            <h1>Currency Converter</h1>
-            <Link className="btn" to="/">
-              Back to Home
-            </Link>
+          <div className="flex">
+            {location.pathname === "/currency/details" ? (
+              <h1>
+                {currencyFrom} - {currenciesList[currencyFrom]}
+              </h1>
+            ) : (
+              <h1>Currency Exchanger</h1>
+            )}
+            {location.pathname === "/currency/details" && (
+              <Link className="btn" to="/">
+                Back to Home
+              </Link>
+            )}
           </div>
 
           <div className="currency-box--controls">
@@ -96,13 +110,14 @@ const Layout: FC<ILayoutProps> = (props) => {
                     data-testid="from"
                     id="from"
                     value={currencyFrom}
+                    disabled={location.pathname === "/currency/details"}
                     onChange={(e) =>
                       dispatch(updateCurrencyFrom(e.target.value))
                     }
                   >
                     <option value={currencyFrom}>{currencyFrom}</option>
-                    {currenciesList.length &&
-                      currenciesList.map((currency) => {
+                    {Object.keys(currenciesList).length &&
+                      Object.keys(currenciesList).map((currency) => {
                         return (
                           <option key={currency} value={currency}>
                             {currency}
@@ -114,6 +129,7 @@ const Layout: FC<ILayoutProps> = (props) => {
 
                 <button
                   onClick={() => dispatch(onSwapClicked())}
+                  disabled={location.pathname === "/currency/details"}
                   type="button"
                   className="btn"
                 >
@@ -132,8 +148,8 @@ const Layout: FC<ILayoutProps> = (props) => {
                     value={currencyTo}
                   >
                     <option value={currencyTo}>{currencyTo}</option>
-                    {currenciesList.length &&
-                      currenciesList.map((currency) => {
+                    {Object.keys(currenciesList).length &&
+                      Object.keys(currenciesList).map((currency) => {
                         return (
                           <option key={currency} value={currency}>
                             {currency}
@@ -156,12 +172,14 @@ const Layout: FC<ILayoutProps> = (props) => {
                   {isConverting ? "converting..." : `${amount} ${currencyTo}`}
                 </div>
 
-                <Link
-                  className="conversion-details--link"
-                  to="/currency/details"
-                >
-                  More Details
-                </Link>
+                {location.pathname !== "/currency/details" && (
+                  <Link
+                    className="conversion-details--link"
+                    to="/currency/details"
+                  >
+                    More Details
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -173,4 +191,4 @@ const Layout: FC<ILayoutProps> = (props) => {
   );
 };
 
-export default Layout;
+export default memo(Layout);
