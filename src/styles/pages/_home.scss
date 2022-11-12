@@ -1,13 +1,26 @@
-.currency-box--controls {
-  padding-top: 3rem;
+.home-page {
+  padding: $padding-y-large $padding-x-large;
 }
 
-.conversion-details--link {
+.grid-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(32.5rem, 1fr));
+  grid-template-rows: auto;
+  gap: 2.4rem;
+}
+
+.converted-result-card {
+  margin: 0 auto;
+  width: 30.5rem;
+  height: 15rem;
+  background-color: lighten($color-primary, 50%);
+  border-radius: 0.6rem;
+  transition: all .3s;
   display: grid;
   place-content: center;
-  background-color: #3a86ff;
-  width: 30%;
-  font-size: 1.6rem;
-  text-decoration: none;
-  color: $color-white;
+  font-size: 2rem;
+
+  &:hover {
+    transform: translateY(-0.5rem);
+  }
 }

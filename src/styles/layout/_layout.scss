@@ -47,3 +47,17 @@
   justify-content: space-between;
   margin-top: 2rem;
 }
+
+.currency-box--controls {
+  padding-top: 3rem;
+}
+
+.conversion-details--link {
+  display: grid;
+  place-content: center;
+  background-color: #3a86ff;
+  width: 30%;
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: $color-white;
+}
