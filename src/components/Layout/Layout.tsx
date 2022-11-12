@@ -20,8 +20,6 @@ const Layout: FC<ILayoutProps> = (props) => {
 
   const location = useLocation();
 
-  console.log(location);
-
   const {
     currency: {
       conversionAmount,
@@ -54,8 +52,6 @@ const Layout: FC<ILayoutProps> = (props) => {
     );
     dispatch(fetchCurrencies());
   }, []);
-
-  console.log(currenciesList);
 
   return (
     <main className="layout">
