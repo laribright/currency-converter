@@ -1,3 +1,4 @@
+import ConvertedResultCard from "../components/ConvertedResultCard/ConvertedResultCard";
 import { useAppSelector } from "../hooks/storeHooks";
 
 const Home = () => {
@@ -17,9 +18,13 @@ const Home = () => {
       <div className="grid-display">
         {CONVERSION_RESULT.map((result, idx) => {
           return (
-            <div key={idx} className="converted-result-card">
-              {conversionAmount} {currencyFrom} = {amount} {currencyTo}
-            </div>
+            <ConvertedResultCard
+              key={idx}
+              conversionAmount={conversionAmount}
+              currencyFrom={currencyFrom}
+              currencyTo={currencyTo}
+              amount={amount}
+            />
           );
         })}
       </div>
