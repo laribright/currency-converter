@@ -90,8 +90,7 @@ const Layout: FC<ILayoutProps> = (props) => {
               </div>
 
               <div className="btn">
-                1 {currencyFrom} = 1.2
-                {currencyTo}
+                {conversionAmount} {currencyFrom} = {amount} {currencyTo}
               </div>
             </div>
 
@@ -106,7 +105,10 @@ const Layout: FC<ILayoutProps> = (props) => {
                     data-testid="from"
                     id="from"
                     value={currencyFrom}
-                    disabled={location.pathname === "/currency/details"}
+                    disabled={
+                      location.pathname === "/currency/details" ||
+                      conversionAmount <= 0
+                    }
                     onChange={(e) =>
                       dispatch(updateCurrencyFrom(e.target.value))
                     }
@@ -125,7 +127,10 @@ const Layout: FC<ILayoutProps> = (props) => {
 
                 <button
                   onClick={() => dispatch(onSwapClicked())}
-                  disabled={location.pathname === "/currency/details"}
+                  disabled={
+                    location.pathname === "/currency/details" ||
+                    conversionAmount <= 0
+                  }
                   type="button"
                   className="btn"
                 >
@@ -142,6 +147,7 @@ const Layout: FC<ILayoutProps> = (props) => {
                     data-testid="to"
                     id="to"
                     value={currencyTo}
+                    disabled={conversionAmount <= 0}
                   >
                     <option value={currencyTo}>{currencyTo}</option>
                     {Object.keys(currenciesList).length &&
@@ -156,7 +162,12 @@ const Layout: FC<ILayoutProps> = (props) => {
                 </div>
               </div>
 
-              <button type="submit" onClick={onConvertClicked} className="btn">
+              <button
+                type="submit"
+                onClick={onConvertClicked}
+                className="btn"
+                disabled={conversionAmount <= 0}
+              >
                 Convert
               </button>
 
