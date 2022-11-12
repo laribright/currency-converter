@@ -1,3 +1,8 @@
+# Start Here
+Please create a .env file and add REACT_APP_API_LAYER_KEY=tqSvaewJjOw6kHMJtxngxSQ4cgLrGttb
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
