@@ -1,12 +1,9 @@
 import { FC, memo, ReactNode, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import {
-  convertCurrencies,
-  fetchCurrencies,
-  updateConversionAmount,
-} from "../../features/currency";
+import { updateConversionAmount } from "../../features/currency";
 import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
+import { convertCurrencies, fetchCurrencies } from "../../utils/api";
 import ConversionControls from "../ConversionControls/ConversionControls";
 import ConversionResult from "../ConversionResult/ConversionResult";
 

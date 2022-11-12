@@ -1,12 +1,12 @@
 import { useLocation } from "react-router-dom";
 
 import {
-  convertCurrencies,
   onSwapClicked,
   updateCurrencyFrom,
   updateCurrencyTo,
 } from "../../features/currency";
 import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
+import { convertCurrencies } from "../../utils/api";
 
 const ConversionControls = () => {
   const location = useLocation();
