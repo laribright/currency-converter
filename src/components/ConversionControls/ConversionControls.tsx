@@ -2,9 +2,7 @@ import { useLocation } from "react-router-dom";
 
 import {
   convertCurrencies,
-  fetchCurrencies,
   onSwapClicked,
-  updateConversionAmount,
   updateCurrencyFrom,
   updateCurrencyTo,
 } from "../../features/currency";
@@ -19,7 +17,6 @@ const ConversionControls = () => {
       conversionAmount,
       currencyFrom,
       currencyTo,
-      convertedData: { amount, error, loading: isConverting },
       currencies: { currenciesList, error: fetchCurrenciesError, loading },
     },
   } = useAppSelector((state) => state);

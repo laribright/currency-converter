@@ -1,3 +1,49 @@
-.layout {
+.main {
   margin-top: 8rem;
+}
+
+.layout {
+  padding: 0 $padding-x-large;
+  margin-top: 14rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  &--label {
+    font-weight: 500;
+    font-size: 1.8rem;
+    margin-bottom: 0.7rem;
+  }
+}
+
+.conversion-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.conversion-controls__select {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.conversion-result {
+  border: 1px dotted $color-primary;
+  display: grid;
+  place-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  width: 60%;
+  padding: 1.7rem 2.5rem;
+}
+
+.conversion-result--box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
 }

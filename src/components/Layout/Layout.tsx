@@ -42,61 +42,59 @@ const Layout: FC<ILayoutProps> = (props) => {
   }, []);
 
   return (
-    <main className="layout">
-      <div className="home-page" data-testid="home-page">
-        <div className="fixed-home-page">
-          <div className="flex">
-            {location.pathname === "/currency/details" ? (
-              <h1>
-                {currencyFrom} - {currenciesList[currencyFrom]}
-              </h1>
-            ) : (
-              <h1>Currency Exchanger</h1>
-            )}
-            {location.pathname === "/currency/details" && (
-              <Link className="btn" to="/">
-                Back to Home
-              </Link>
-            )}
-          </div>
+    <main className="main">
+      <div className="layout">
+        <div className="flex">
+          {location.pathname === "/currency/details" ? (
+            <h1>
+              {currencyFrom} - {currenciesList[currencyFrom]}
+            </h1>
+          ) : (
+            <h1>Currency Exchanger</h1>
+          )}
+          {location.pathname === "/currency/details" && (
+            <Link className="btn" to="/">
+              Back to Home
+            </Link>
+          )}
+        </div>
 
-          <div className="currency-box--controls">
-            <div className="left-pane">
-              <div className="form-group">
-                <label className="form-group--label" htmlFor="Amount">
-                  Amount
-                </label>
-                <input
-                  className="input"
-                  type="number"
-                  id="Amount"
-                  value={conversionAmount}
-                  onChange={(e) =>
-                    dispatch(updateConversionAmount(Number(e.target.value)))
-                  }
-                />
-              </div>
-
-              <div className="btn">
-                {conversionAmount} {currencyFrom} = {amount} {currencyTo}
-              </div>
+        <div className="flex currency-box--controls">
+          <div className="flex-vertical">
+            <div className="form-group">
+              <label className="form-group--label" htmlFor="Amount">
+                Amount
+              </label>
+              <input
+                className="input"
+                type="number"
+                id="Amount"
+                value={conversionAmount}
+                onChange={(e) =>
+                  dispatch(updateConversionAmount(Number(e.target.value)))
+                }
+              />
             </div>
 
-            <div className="conversion-controls">
-              <ConversionControls />
+            <div className="btn">
+              {conversionAmount} {currencyFrom} = {amount} {currencyTo}
+            </div>
+          </div>
 
-              <div className="conversion-result--box">
-                <ConversionResult />
+          <div className="conversion-controls">
+            <ConversionControls />
 
-                {location.pathname !== "/currency/details" && (
-                  <Link
-                    className="conversion-details--link"
-                    to="/currency/details"
-                  >
-                    More Details
-                  </Link>
-                )}
-              </div>
+            <div className="conversion-result--box">
+              <ConversionResult />
+
+              {location.pathname !== "/currency/details" && (
+                <Link
+                  className="conversion-details--link"
+                  to="/currency/details"
+                >
+                  More Details
+                </Link>
+              )}
             </div>
           </div>
         </div>
